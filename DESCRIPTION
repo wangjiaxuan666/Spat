@@ -1,6 +1,6 @@
 Package: Spat
 Title: Analysis Spatial gene expresion data, which brings convenient integration scripts and shortcut channels to other packages.
-Version: 0.0.1
+Version: 0.0.1.1
 Authors@R: 
     person(given = "JiaXuan",
            family = "Wang",

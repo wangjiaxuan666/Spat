@@ -100,7 +100,7 @@ load_spat_env <- function(){
   j = 0
   pb <- utils::txtProgressBar(min = 0, max = length(need_pak), style = 3)
   for(i in need_pak){
-    if(i %in% paknames){IF[j] = TRUE } else {pakname = i; utils::install.packages(pakname);require(pakname);IF[j] = FALSE}
+    if(i %in% paknames){require(i);IF[j] = TRUE } else {utils::install.packages(i);require(i);IF[j] = FALSE}
     j = j + 1
     utils::setTxtProgressBar(pb, j)
   }

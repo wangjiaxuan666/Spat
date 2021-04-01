@@ -25,6 +25,20 @@ You can install the released version of Spat from [CRAN](https://CRAN.R-project.
 ``` r
 remotes::install_github("wangjiaxuan666/Spat")
 ```
+IF install wrong wtih problem that some packages can't install. please install the packages separately. Such as 
+
+```
+package ‘spatstat.utils’ successfully unpacked and MD5 sums checked
+错误: Failed to install 'Spat' from GitHub:
+  (由警告转换成)cannot remove prior installation of package ‘spatstat.utils’
+```
+
+You can do 
+
+``` r
+install.packages("spatstat.utils")
+# Make sure when you install, please don't use seurat packages in another R terminal
+```
 
 ## NOTHING
 
