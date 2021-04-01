@@ -1,0 +1,22 @@
+Package: Spat
+Title: Analysis Spatial gene expresion data, which brings convenient integration scripts and shortcut channels to other packages.
+Version: 0.0.1
+Authors@R: 
+    person(given = "JiaXuan",
+           family = "Wang",
+           role = c("aut", "cre"),
+           email = "poormouse@126.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: The packages created mainly for myself to help tidy data.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    ggplot2,
+    Seurat,
+    dplyr,
+    tidyr,
+    data.table,
+    utils
