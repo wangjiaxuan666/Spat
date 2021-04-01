@@ -88,19 +88,22 @@ get_exp_loc <- function(object, featrues, cells = NULL, slot = "scale.data",...)
 
 #' Title the packages environment need install or library
 #'
+#' @param pkgs which R packages you need library
+#'
 #' @return environment
 #' @export load_spat_env
 #' @importFrom utils txtProgressBar setTxtProgressBar installed.packages install.packages
 #'
 #' @examples #
-load_spat_env <- function(){
+load_spat_env <- function(pkgs = c("Seurat","tidyverse","data.table","patchwork")){
   paknames = rownames(utils::installed.packages())
-  need_pak = c("Seurat","tidyverse","data.table","patchwork")
+  need_pak = pkgs
   IF = vector()
   j = 0
   pb <- utils::txtProgressBar(min = 0, max = length(need_pak), style = 3)
   for(i in 1:length(need_pak)){
-    if(i %in% paknames){require(need_pak[i]);IF[j] = TRUE } else {utils::install.packages(need_pak[i]);require(need_pak[i]);IF[j] = FALSE}
+    packagename = need_pak[i]
+    if(packagename %in% paknames){suppressPackageStartupMessages(require(packagename,character.only = TRUE,quietly = TRUE));IF[j] = TRUE } else {utils::install.packages(packagename,quiet = TRUE);suppressPackageStartupMessages(require(packagename,character.only = TRUE,quietly = TRUE));IF[j] = FALSE}
     j = j + 1
     utils::setTxtProgressBar(pb, j)
   }
@@ -109,6 +112,7 @@ load_spat_env <- function(){
   }
   close(pb)
 }
+
 
 #' Title cool but useless
 #'

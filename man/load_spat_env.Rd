@@ -4,7 +4,10 @@
 \alias{load_spat_env}
 \title{Title the packages environment need install or library}
 \usage{
-load_spat_env()
+load_spat_env(pkgs = c("Seurat", "tidyverse", "data.table", "patchwork"))
+}
+\arguments{
+\item{pkgs}{which R packages you need library}
 }
 \value{
 environment
