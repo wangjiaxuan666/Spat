@@ -3,10 +3,10 @@
     splitline()
   )
   packageStartupMessage(
-    message("Welcome to My package !")
+    messageline("Welcome to My package !")
   )
   packageStartupMessage(
-    message("Use `load_spat_env Firstly`")
+    messageline("Use `load_spat_env Firstly`")
   )
   packageStartupMessage(
     splitline()
