@@ -52,13 +52,13 @@ cell_in_chip <- function(object = NULL, cols = NULL, rotate = NULL){
 #'
 #' @examples #
 exp_in_chip <- function(object, featrues, cells = NULL, slot = "scale.data", rotate = NULL,cols = NULL,...){
-
+  
   data_loc_exp = get_exp_loc(object = object, featrues = featrues, cells = cells, slot = slot,...)
-
+  
   if(!is.null(rotate)){
     data_loc_exp = adjust_position(data_loc_exp, angle = rotate)
   }
-
+  
   # 设置范围-------------------
   slice_coord_x_min = min(data_loc_exp$x)
   slice_coord_x_max = max(data_loc_exp$x)
@@ -70,9 +70,9 @@ exp_in_chip <- function(object, featrues, cells = NULL, slot = "scale.data", rot
     ggplot2::theme_void()+
     ggplot2::labs(color = "Gene Expression Level")+
     ggplot2::coord_cartesian(xlim = c(slice_coord_x_min,slice_coord_x_max),
-                    ylim = c(slice_coord_y_min,slice_coord_y_max)) -> plot_result
+                             ylim = c(slice_coord_y_min,slice_coord_y_max)) -> plot_result
   if(!is.null(cols)){
-    plot_result = plot_result + ggplot2::scale_color_manual(values = cols)
+    plot_result = plot_result + ggplot2::scale_color_gradientn(colors = cols)
   }
   return(plot_result)
 }
