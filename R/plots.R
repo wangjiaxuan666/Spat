@@ -51,7 +51,7 @@ cell_in_chip <- function(object = NULL, cols = NULL, rotate = NULL){
 #' @export exp_in_chip
 #'
 #' @examples #
-exp_in_chip <- function(object, featrues, cells = NULL, slot = "scale.data", rotate = NULL,cols = NULL,...){
+exp_in_chip <- function(object, featrues, cells = NULL, slot = "scale.data", rotate = NULL,cols = c("white","red","black"),...){
   
   data_loc_exp = get_exp_loc(object = object, featrues = featrues, cells = cells, slot = slot,...)
   
