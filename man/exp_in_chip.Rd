@@ -6,24 +6,27 @@
 \usage{
 exp_in_chip(
   object,
-  featrues,
+  features,
   cells = NULL,
   slot = "scale.data",
   rotate = NULL,
-  cols = NULL,
+  size = 2,
+  cols = c("white", "red", "black"),
   ...
 )
 }
 \arguments{
 \item{object}{the Seurat object}
 
-\item{featrues}{the gene ID want to display}
+\item{features}{the gene ID want to display}
 
 \item{cells}{the cell want to subset}
 
 \item{slot}{must be one of "counts","data","scale.data"}
 
 \item{rotate}{the rotate angle, must be a pi number, like pi/2}
+
+\item{size}{the point size}
 
 \item{cols}{the color vector to mapping}
 

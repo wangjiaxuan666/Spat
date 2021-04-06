@@ -3,12 +3,14 @@
 #' @param object the Seurat object
 #' @param cols the color vector to mapping
 #' @param rotate the rotate angle, must be a pi number, like pi/2
+#' @param ... parameter
+#' @param size the point size
 #' @importFrom  ggplot2 ggplot aes geom_point theme_void labs coord_cartesian scale_color_manual
 #' @return ggplot
 #' @export cell_in_chip
 #'
 #' @examples #
-cell_in_chip <- function(object = NULL, cols = NULL, rotate = NULL){
+cell_in_chip <- function(object = NULL, cols = NULL, rotate = NULL, size = 2, ...){
   data_loc = object@active.ident
   # 提取分群结果
   data_loc = add_loc(data = data_loc)
@@ -24,7 +26,7 @@ cell_in_chip <- function(object = NULL, cols = NULL, rotate = NULL){
   slice_coord_y_max = max(data_loc$y)
 
   ggplot2::ggplot(data_loc)+
-    ggplot2::geom_point(ggplot2::aes(x = x,y = y,color = data),size = 3)+
+    ggplot2::geom_point(ggplot2::aes(x = x,y = y,color = data),size = size, ...)+
     ggplot2::theme_void()+
     ggplot2::labs(color = "Cell Type")+
     ggplot2::coord_cartesian(xlim = c(slice_coord_x_min,slice_coord_x_max),
@@ -44,6 +46,7 @@ cell_in_chip <- function(object = NULL, cols = NULL, rotate = NULL){
 #' @param slot must be one of "counts","data","scale.data"
 #' @param rotate the rotate angle, must be a pi number, like pi/2
 #' @param cols the color vector to mapping
+#' @param size the point size
 #' @param ... inherit
 #' @importFrom  ggplot2 ggplot aes geom_point theme_void labs coord_cartesian scale_color_manual
 #'
@@ -51,14 +54,14 @@ cell_in_chip <- function(object = NULL, cols = NULL, rotate = NULL){
 #' @export exp_in_chip
 #'
 #' @examples #
-exp_in_chip <- function(object, features, cells = NULL, slot = "scale.data", rotate = NULL,cols = c("white","red","black"),...){
-  
+exp_in_chip <- function(object, features, cells = NULL, slot = "scale.data", rotate = NULL, size = 2, cols = c("white","red","black"),...){
+
   data_loc_exp = get_exp_loc(object = object, features = features, cells = cells, slot = slot,...)
-  
+
   if(!is.null(rotate)){
     data_loc_exp = adjust_position(data_loc_exp, angle = rotate)
   }
-  
+
   # 设置范围-------------------
   slice_coord_x_min = min(data_loc_exp$x)
   slice_coord_x_max = max(data_loc_exp$x)
@@ -66,7 +69,7 @@ exp_in_chip <- function(object, features, cells = NULL, slot = "scale.data", rot
   slice_coord_y_max = max(data_loc_exp$y)
   colnames(data_loc_exp)[3] = "features"
   ggplot2::ggplot(data_loc_exp)+
-    ggplot2::geom_point(aes(x = x,y = y,color = features),size = 3)+
+    ggplot2::geom_point(aes(x = x,y = y,color = features),size = size, ...)+
     ggplot2::theme_void()+
     ggplot2::labs(color = "Expression")+
     ggplot2::coord_cartesian(xlim = c(slice_coord_x_min,slice_coord_x_max),

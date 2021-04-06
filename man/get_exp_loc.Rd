@@ -5,12 +5,12 @@
 \title{Title Retrieves data (feature expression, PCA scores, metrics, etc.) for a
 set of cells in a Seurat object and add the coordinate position of X and Y of spatial chip.}
 \usage{
-get_exp_loc(object, featrues, cells = NULL, slot = "scale.data", ...)
+get_exp_loc(object, features, cells = NULL, slot = "scale.data", ...)
 }
 \arguments{
 \item{object}{the Seurat object}
 
-\item{featrues}{the var want to select}
+\item{features}{the var want to select}
 
 \item{cells}{the cell want to subset}
 

@@ -4,7 +4,7 @@
 \alias{cell_in_chip}
 \title{Title: Draw a cell clustering map at the chip position}
 \usage{
-cell_in_chip(object = NULL, cols = NULL, rotate = NULL)
+cell_in_chip(object = NULL, cols = NULL, rotate = NULL, size = 2, ...)
 }
 \arguments{
 \item{object}{the Seurat object}
@@ -12,6 +12,10 @@ cell_in_chip(object = NULL, cols = NULL, rotate = NULL)
 \item{cols}{the color vector to mapping}
 
 \item{rotate}{the rotate angle, must be a pi number, like pi/2}
+
+\item{size}{the point size}
+
+\item{...}{parameter}
 }
 \value{
 ggplot

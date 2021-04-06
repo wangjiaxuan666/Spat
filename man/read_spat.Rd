@@ -4,7 +4,7 @@
 \alias{read_spat}
 \title{Title read data from BGI stereo-seq, and creat a seurat object}
 \usage{
-read_spat(file, pattern = "a", seurat = TRUE, name = "Spatial")
+read_spat(file, pattern = "x", seurat = TRUE, name = "Spatial")
 }
 \arguments{
 \item{file}{the data csv file path}
