@@ -39,7 +39,7 @@ cell_in_chip <- function(object = NULL, cols = NULL, rotate = NULL){
 #' Title: heatmap on chip
 #'
 #' @param object the Seurat object
-#' @param featrues the gene ID want to display
+#' @param features the gene ID want to display
 #' @param cells the cell want to subset
 #' @param slot must be one of "counts","data","scale.data"
 #' @param rotate the rotate angle, must be a pi number, like pi/2
@@ -51,9 +51,9 @@ cell_in_chip <- function(object = NULL, cols = NULL, rotate = NULL){
 #' @export exp_in_chip
 #'
 #' @examples #
-exp_in_chip <- function(object, featrues, cells = NULL, slot = "scale.data", rotate = NULL,cols = c("white","red","black"),...){
+exp_in_chip <- function(object, features, cells = NULL, slot = "scale.data", rotate = NULL,cols = c("white","red","black"),...){
   
-  data_loc_exp = get_exp_loc(object = object, featrues = featrues, cells = cells, slot = slot,...)
+  data_loc_exp = get_exp_loc(object = object, features = features, cells = cells, slot = slot,...)
   
   if(!is.null(rotate)){
     data_loc_exp = adjust_position(data_loc_exp, angle = rotate)
@@ -68,7 +68,7 @@ exp_in_chip <- function(object, featrues, cells = NULL, slot = "scale.data", rot
   ggplot2::ggplot(data_loc_exp)+
     ggplot2::geom_point(aes(x = x,y = y,color = features),size = 3)+
     ggplot2::theme_void()+
-    ggplot2::labs(color = "Gene Expression Level")+
+    ggplot2::labs(color = "Expression")+
     ggplot2::coord_cartesian(xlim = c(slice_coord_x_min,slice_coord_x_max),
                              ylim = c(slice_coord_y_min,slice_coord_y_max)) -> plot_result
   if(!is.null(cols)){

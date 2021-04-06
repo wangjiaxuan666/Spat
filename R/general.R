@@ -24,7 +24,7 @@ adjust_position <- function(data = NULL, angle = NULL){
 #' @export add_loc
 #'
 #' @examples #
-add_loc <- function(data = NULL, pattern = "a"){
+add_loc <- function(data = NULL, pattern = "x"){
   data = as.data.frame(data)
   rownames(data) = gsub(".*_","",rownames(data))
   data_loc <- cbind.data.frame(x=as.numeric(sapply(strsplit(rownames(data),split=pattern),"[",1)),
@@ -44,7 +44,7 @@ add_loc <- function(data = NULL, pattern = "a"){
 #' @export read_spat
 #'
 #' @examples #
-read_spat <- function(file,pattern = "a",seurat = TRUE,name = "Spatial"){
+read_spat <- function(file,pattern = "x",seurat = TRUE,name = "Spatial"){
   data_BGI_raw = data.table::fread(file)
   splitline()
   messageline("Data imported successfully")
@@ -70,7 +70,7 @@ read_spat <- function(file,pattern = "a",seurat = TRUE,name = "Spatial"){
 #' set of cells in a Seurat object and add the coordinate position of X and Y of spatial chip.
 #'
 #' @param object the Seurat object
-#' @param featrues the var want to select
+#' @param features the var want to select
 #' @param cells the cell want to subset
 #' @param slot must be one of "counts","data","scale.data"
 #' @param ... inherit
@@ -80,8 +80,8 @@ read_spat <- function(file,pattern = "a",seurat = TRUE,name = "Spatial"){
 #' @export get_exp_loc
 #'
 #' @examples#
-get_exp_loc <- function(object, featrues, cells = NULL, slot = "scale.data",...){
-  data = Seurat::FetchData(object = object, vars = featrues, cells = cells, slot = slot,...)
+get_exp_loc <- function(object, features, cells = NULL, slot = "scale.data",...){
+  data = Seurat::FetchData(object = object, vars = features, cells = cells, slot = slot,...)
   data_loc_exp = add_loc(data)
   return(data_loc_exp)
 }
