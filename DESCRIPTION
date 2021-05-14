@@ -20,4 +20,5 @@ Imports:
     tidyr,
     data.table,
     utils,
-    monocle3
+    monocle3,
+    Matrix

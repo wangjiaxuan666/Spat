@@ -42,30 +42,40 @@ add_loc <- function(data = NULL, pattern = "x"){
 #' @param name the object name
 #' @return object
 #' @export read_spat
+#' @importFrom data.table fread
+#' @importFrom Matrix sparseMatrix
+#' @importFrom Seurat CreateSeuratObject
 #'
 #' @examples #
 read_spat <- function(file,pattern = "x",seurat = TRUE,name = "Spatial"){
   data_BGI_raw = data.table::fread(file)
   splitline()
-  messageline("Data imported successfully")
-  data_BGI_raw$loci  = with(data_BGI_raw, paste0(x,pattern,y))
-  data_BGI_raw = data_BGI_raw[,c(1,4,5)]
-  data_matrix_raw =  data.table::dcast(data_BGI_raw, geneID~loci,value.var = "MIDCounts")
-  data_matrix_raw =  data.table::setDF(data_matrix_raw, rownames = data_matrix_raw$geneID)
-  data_matrix_raw = data_matrix_raw[,-1]
-  data_matrix_raw[is.na(data_matrix_raw)] <- 0
-  stereo = data_matrix_raw
+  messageline("Data imported but waiting for convert")
+  data_BGI_raw$coord  = with(data_BGI_raw, paste0(x,pattern,y))
+  # the gene expression
+  exp = data_BGI_raw$MIDCounts
+  #create gene index for sparse.matrix
+  gene_id = unique(data_BGI_raw$geneID)
+  index_gid = data.frame(row.names = gene_id, value = seq(length(unique(gene_id))))
+  gid = index_gid[data_BGI_raw$geneID, "value"]
+  #create coordinate index for sparse.matrix
+  bin_id = unique(data_BGI_raw$coord)
+  index_coord = data.frame(row.names = bin_id, value = seq(length(unique(bin_id))))
+  bid = index_coord[data_BGI_raw$coord,"value"]
+  # create sparse.matrix
+  stereo_matrix_sparse <- Matrix::sparseMatrix(i = gid, j = bid, x = exp)
+  rownames(stereo_matrix_sparse) <- rownames(index_gid)
+  colnames(stereo_matrix_sparse) <- rownames(index_coord)
+  # NEXT
   splitline()
   messageline("Data successfully converted")
   if(seurat == TRUE){
-    stereo_matrix_sparse <- Seurat::as.sparse(data_matrix_raw)
     stereo <- Seurat::CreateSeuratObject(counts = stereo_matrix_sparse, project = name, min.cells = 3, min.features = 200)
   }
   splitline()
   messageline("Successfully converted to Seurat object")
   return(stereo)
 }
-
 #' Title Retrieves data (feature expression, PCA scores, metrics, etc.) for a
 #' set of cells in a Seurat object and add the coordinate position of X and Y of spatial chip.
 #'
