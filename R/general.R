@@ -105,7 +105,7 @@ get_exp_loc <- function(object, features, cells = NULL, slot = "scale.data",...)
 #' @importFrom utils txtProgressBar setTxtProgressBar installed.packages install.packages
 #'
 #' @examples #
-load_spat_env <- function(pkgs = c("Seurat","tidyverse","data.table","patchwork")){
+load_spat_env <- function(pkgs = c("Seurat","tidyverse","data.table","patchwork","Matrix")){
   paknames = rownames(utils::installed.packages())
   need_pak = pkgs
   IF = vector()
