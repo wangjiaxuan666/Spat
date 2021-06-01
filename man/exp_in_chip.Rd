@@ -11,7 +11,7 @@ exp_in_chip(
   slot = "scale.data",
   rotate = NULL,
   size = 2,
-  cols = c("white", "red", "black"),
+  cols = c("#F3EDEC", "red", "black"),
   ...
 )
 }

@@ -55,13 +55,13 @@ cell_in_chip <- function(object = NULL, cols = NULL, rotate = NULL, size = 2, ..
 #'
 #' @examples #
 exp_in_chip <- function(object, features, cells = NULL, slot = "scale.data", rotate = NULL, size = 2, cols = c("#F3EDEC","red","black"),...){
-  
+
   data_loc_exp = get_exp_loc(object = object, features = features, cells = cells, slot = slot,...)
-  
+
   if(!is.null(rotate)){
     data_loc_exp = adjust_position(data_loc_exp, angle = rotate)
   }
-  
+
   # 设置范围-------------------
   slice_coord_x_min = min(data_loc_exp$x)
   slice_coord_x_max = max(data_loc_exp$x)
@@ -71,7 +71,7 @@ exp_in_chip <- function(object, features, cells = NULL, slot = "scale.data", rot
   ggplot2::ggplot(data_loc_exp)+
     ggplot2::geom_point(aes(x = x,y = y,color = features),size = size, ...)+
     ggplot2::theme_void()+
-    ggplot2::theme(plot.title = element_text(color = "black",hjust = 0.5,size = 30,face = "bold"))+
+    ggplot2::theme(plot.title = ggplot2::element_text(color = "black",hjust = 0.5,size = 30,face = "bold"))+
     ggplot2::labs(color = "Exp",title = features)+
     ggplot2::coord_cartesian(xlim = c(slice_coord_x_min,slice_coord_x_max),
                              ylim = c(slice_coord_y_min,slice_coord_y_max)) -> plot_result
@@ -82,13 +82,13 @@ exp_in_chip <- function(object, features, cells = NULL, slot = "scale.data", rot
 }
 
 
-#' Title plot the point in spatial chip
+#' Title: plot the point in spatial chip
 #'
 #' @param data the dataframe include x and y column represent the location in chip.
 #' @param features which features you want to display.
-#' @param size the ggplot2 point size 
+#' @param size the ggplot2 point size
 #' @param cols the colors
-#' @param ... 
+#' @param ... parameter
 #'
 #' @return ggplot2 object
 #' @export plot_chip
@@ -104,7 +104,7 @@ plot_chip <- function(data = data,features = features,size = 2, cols = c("white"
   ggplot2::ggplot(data)+
     ggplot2::geom_point(aes(x = x,y = y,color = name),size = size, ...)+
     ggplot2::theme_void()+
-    ggplot2::theme(plot.title = element_text(color = "black",hjust = 0.5,size = 30,face = "bold"))+
+    ggplot2::theme(plot.title = ggplot2::element_text(color = "black",hjust = 0.5,size = 30,face = "bold"))+
     ggplot2::labs(color = "Exp",title = features)+
     ggplot2::coord_cartesian(xlim = c(slice_coord_x_min,slice_coord_x_max),
                              ylim = c(slice_coord_y_min,slice_coord_y_max)) -> plot_result
