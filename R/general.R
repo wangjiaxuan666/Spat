@@ -187,3 +187,22 @@ seurat_to_monocle3 <- function(object){
   cds_from_seurat@preprocess_aux$gene_loadings <- object@reductions[["pca"]]@feature.loadings
   return(cds_from_seurat)
 }
+
+#' Title the ggplot2 ggsave function changed for the dir path
+#'
+#' @param dir the dirpath you want to save in
+#' @param filename the filename you want to name
+#' @param w the width parameter in ggplot2::ggsave
+#' @param h the height parameter in ggplot2::ggsave
+#' @param dpi the dpi parameter in ggplot2::ggsave
+#'
+#' @return ggplot2 object
+#' @export gs
+#' @importFrom ggplot2 ggsave
+#'
+#' @examples #
+
+gs <- function(dir,filename,w,h,dpi){
+  ggplot2::ggsave(paste(dir, "/",filename,sep = ""),
+                  width = w,height = h,dpi = dpi)
+}
