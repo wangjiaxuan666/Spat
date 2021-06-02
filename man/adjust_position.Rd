@@ -2,7 +2,7 @@
 % Please edit documentation in R/general.R
 \name{adjust_position}
 \alias{adjust_position}
-\title{Title: Sometimes the slice is not in the correct position on the chip. This
+\title{Title Sometimes the slice is not in the correct position on the chip. This
 function can make the data point rotate at a specific angle}
 \usage{
 adjust_position(data = NULL, angle = NULL)
@@ -16,7 +16,7 @@ adjust_position(data = NULL, angle = NULL)
 data
 }
 \description{
-Title: Sometimes the slice is not in the correct position on the chip. This
+Title Sometimes the slice is not in the correct position on the chip. This
 function can make the data point rotate at a specific angle
 }
 \examples{

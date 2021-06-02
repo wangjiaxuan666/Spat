@@ -1,4 +1,4 @@
-#' Title: Sometimes the slice is not in the correct position on the chip. This
+#' Title Sometimes the slice is not in the correct position on the chip. This
 #' function can make the data point rotate at a specific angle
 #'
 #' @param data the data has x and y column represent coordinate position.
