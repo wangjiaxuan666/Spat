@@ -202,7 +202,7 @@ seurat_to_monocle3 <- function(object){
 #'
 #' @examples #
 
-gs <- function(dir,filename,w,h,dpi){
+gs <- function(dir,filename,width,height,dpi){
   ggplot2::ggsave(paste(dir, "/",filename,sep = ""),
-                  width = w,height = h,dpi = dpi)
+                  width = width,height = height,dpi = dpi)
 }
