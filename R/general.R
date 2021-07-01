@@ -192,8 +192,8 @@ seurat_to_monocle3 <- function(object){
 #'
 #' @param dir the dirpath you want to save in
 #' @param filename the filename you want to name
-#' @param w the width parameter in ggplot2::ggsave
-#' @param h the height parameter in ggplot2::ggsave
+#' @param width the width parameter in ggplot2::ggsave
+#' @param height the height parameter in ggplot2::ggsave
 #' @param dpi the dpi parameter in ggplot2::ggsave
 #'
 #' @return ggplot2 object
@@ -205,4 +205,26 @@ seurat_to_monocle3 <- function(object){
 gs <- function(dir,filename,width,height,dpi){
   ggplot2::ggsave(paste(dir, "/",filename,sep = ""),
                   width = width,height = height,dpi = dpi)
+}
+
+#' Title the St work created by I and qiujiaying,but the workflow don't suit.so make
+#' a "loci2name" function for the object transfrom.
+#'
+#' @param object the seurat spatialObj
+#' @importFrom Seurat RenameCells
+#'
+#' @return object the
+#'
+#' @export loci2name
+#'
+#' @examples #
+loci2name <- function(object){
+  splitline()
+  messageline("Add The chip coord to the cell name")
+  splitline()
+  rowid = object@images[["slice1"]]@coordinates[["row"]]*100
+  colid = object@images[["slice1"]]@coordinates[["col"]]*100
+  coord  = paste0(rowid,"x",colid)
+  object <- Seurat::RenameCells(object, new.names = coord)
+  return(object)
 }

@@ -4,18 +4,18 @@
 \alias{gs}
 \title{Title the ggplot2 ggsave function changed for the dir path}
 \usage{
-gs(dir, filename, w, h, dpi)
+gs(dir, filename, width, height, dpi)
 }
 \arguments{
 \item{dir}{the dirpath you want to save in}
 
 \item{filename}{the filename you want to name}
 
+\item{dpi}{the dpi parameter in ggplot2::ggsave}
+
 \item{w}{the width parameter in ggplot2::ggsave}
 
 \item{h}{the height parameter in ggplot2::ggsave}
-
-\item{dpi}{the dpi parameter in ggplot2::ggsave}
 }
 \value{
 ggplot2 object
