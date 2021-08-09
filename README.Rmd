@@ -171,8 +171,8 @@ p7+p8+p9
 
 其大致原理就是,利用基因富集分析常用的超几何检验的方法来验证,空间组每个cluster的marker基因在单细胞marker基因中的分布是否显著富集,如果显著富集了就意味着两个cluster呈现明显的链接性(单细胞cluster与空间组cluster的对应关系).
 
-[!img](https://pic-1259340288.cos.ap-guangzhou.myqcloud.com/img/202108092302441628521364SABiZm截屏2021-08-09 下午8.35.20.png)
-<centre>MIA的方法示例图:图片来自晶能生物的公开课</centre>
+![](https://pic-1259340288.cos.ap-guangzhou.myqcloud.com/img/202108092324241628522664F4950j%E6%88%AA%E5%B1%8F2021-08-09%20%E4%B8%8B%E5%8D%888.35.20.png)
+<center><font size = 3>MIA的方法示例图:图片来自晶能生物的公开课</font></center>
 
 但是其文中,没有给出具体的实现方法,只是简述了原理. 一度让我放弃这个分析方法. 我尝试复现了这个算法的结果,结果非常符合预期.
 
