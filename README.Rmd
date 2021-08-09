@@ -10,7 +10,8 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
-  message = FALSE
+  message = FALSE,
+  eval = F
 )
 ```
 
@@ -40,6 +41,12 @@ You can do
 install.packages("spatstat.utils")
 # Make sure when you install, please don't use seurat packages in another R terminal
 ```
+And sometime you need install R packages 'monocle3' , the R packages is very diffclut to install it . May be you can this command:
+
+```r
+
+```
+It is hard to use this packages ,But I think it not imposible. beacuse I have tried to install it in HPC centos6 and successly . Nothing can be hard than it.
 
 ## 安装
 
@@ -157,3 +164,9 @@ p9 = exp_in_chip(stereo,featrues = "Krt9",slot = "scale.data",rotate = pi/2,cols
 
 p7+p8+p9
 ```
+
+## MIA 分析
+
+在Nature Biotechnology的2020年七月刊上,Integrating microarray-based spatial transcriptomics and single-cell RNA-seq reveals tissue architecture in pancreatic ductal adenocarcinomas 一文首次提出了用MIA的方法来做单细胞和空间转录组的关联分析. 其大致原理就是,利用基因富集分析的超几何检验的方法来验证,空间组每个cluster的marker基因在单细胞marker基因中的分布是否显著富集,如果显著富集了就意味着两个cluster呈现明显的相关性(单细胞cluster与空间组cluster).
+
+但是其文中,没有给出具体的实现方法,只是简述了原理. 一度让我放弃这个分析方法. 我尝试复现了这个算法的结果,结果非常符合预期.
