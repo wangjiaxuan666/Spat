@@ -167,6 +167,27 @@ p7+p8+p9
 
 ## MIA 分析
 
-在Nature Biotechnology的2020年七月刊上,Integrating microarray-based spatial transcriptomics and single-cell RNA-seq reveals tissue architecture in pancreatic ductal adenocarcinomas 一文首次提出了用MIA的方法来做单细胞和空间转录组的关联分析. 其大致原理就是,利用基因富集分析的超几何检验的方法来验证,空间组每个cluster的marker基因在单细胞marker基因中的分布是否显著富集,如果显著富集了就意味着两个cluster呈现明显的相关性(单细胞cluster与空间组cluster).
+在[《Nature Biotechnology》](https://www.nature.com/nbt/)的2020年七月刊上,一偏研究胰腺导管癌的研究性文章[《Integrating microarray-based spatial transcriptomics and single-cell RNA-seq reveals tissue architecture in pancreatic ductal adenocarcinomas 》](https://www.nature.com/articles/s41587-019-0392-8)一文首次提出了用MIA的方法来做单细胞和空间转录组的关联分析的思路
+
+其大致原理就是,利用基因富集分析常用的超几何检验的方法来验证,空间组每个cluster的marker基因在单细胞marker基因中的分布是否显著富集,如果显著富集了就意味着两个cluster呈现明显的链接性(单细胞cluster与空间组cluster的对应关系).
+
+[!img](https://pic-1259340288.cos.ap-guangzhou.myqcloud.com/img/202108092302441628521364SABiZm截屏2021-08-09 下午8.35.20.png)
+<centre>MIA的方法示例图:图片来自晶能生物的公开课</centre>
 
 但是其文中,没有给出具体的实现方法,只是简述了原理. 一度让我放弃这个分析方法. 我尝试复现了这个算法的结果,结果非常符合预期.
+
+根据晶能公开课讲师何飞的介绍，利用R中base函数租中的phyper功能就可以实现， 自己根据公式， 写了一个函数来实现MIA的分析目的，但是结果和《NBT》的文章的数据在数量级就不对，我根据MIA的算法，做了更改，结果就变得非常漂亮。非常符合预期。
+
+所以将MIA包装成函数，防在`Spat`包中，功能取名为`MIA_analysis`,简单用法如下：
+```{r}
+d = MIA_analysis(sc_object = stereo_smn, sp_object = stereo, sc_diff = sc_diff, sp_diff = sp_diff)
+```
+
+输出结果为单细胞数据和空间组数据的关联性判断P值的-log10（即越大，P值越显著）。
+其中`sc_object`和`sc_diff`分别是scRNA的seurat对象和seurat差异分析的结果矩阵。
+
+>注意：差异矩阵必须是每个群与其他所有依次做差异的结果。其实就是默认参数的比较方式。
+
+而`sp_diff`和`sp_object`，就是空间组的seurat的对象和差异分析矩阵。
+
+赶紧来尝试下吧！
