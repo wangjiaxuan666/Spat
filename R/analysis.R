@@ -4,6 +4,7 @@
 #' @param sp_object the seurat scRNA object or spatial object
 #' @param sc_diff the different expression result of seurat analysis
 #' @param sp_diff the different expression result of seurat analysis
+#' @importFrom stats phyper
 #'
 #' @return data
 #' @export MIA_analysis

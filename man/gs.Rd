@@ -11,11 +11,11 @@ gs(dir, filename, width, height, dpi)
 
 \item{filename}{the filename you want to name}
 
+\item{width}{the width parameter in ggplot2::ggsave}
+
+\item{height}{the height parameter in ggplot2::ggsave}
+
 \item{dpi}{the dpi parameter in ggplot2::ggsave}
-
-\item{w}{the width parameter in ggplot2::ggsave}
-
-\item{h}{the height parameter in ggplot2::ggsave}
 }
 \value{
 ggplot2 object

@@ -11,7 +11,7 @@ loci2name(object)
 \item{object}{the seurat spatialObj}
 }
 \value{
-object the seuratObj
+object the
 }
 \description{
 Title the St work created by I and qiujiaying,but the workflow don't suit.so make
