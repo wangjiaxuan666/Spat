@@ -133,7 +133,7 @@ load_spat_env <- function(pkgs = c("Seurat","tidyverse","data.table","patchwork"
 splitline <- function() {
   width <- getOption("width")
   ws <- rep("=", floor(width))
-  cat("\n",ws, sep = "")
+  cat("\n",ws,"\n" sep = "")
 }
 
 #' Title nothing
@@ -146,7 +146,7 @@ splitline <- function() {
 #' @examples #
 messageline <- function(message) {
   width <- getOption("width")
-  mid <- paste0("^_^   ",message,"   ^_^\n",sep = "")
+  mid <- paste0("\n^_^   ",message,"   ^_^\n",sep = "")
   ws <- rep(" ", floor((width - nchar(mid))/2))
   cat(ws, mid, ws, sep = "")
 }
