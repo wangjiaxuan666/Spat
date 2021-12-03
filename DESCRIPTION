@@ -1,6 +1,6 @@
 Package: Spat
 Title: Spatial gene expresion data analysis workflow which can brings convenient integration scripts and shortcut channels to other packages.
-Version: 0.0.2
+Version: 0.2
 Authors@R: 
     person(given = "JiaXuan",
            family = "Wang",
@@ -12,7 +12,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Imports: 
     ggplot2,
     Seurat,

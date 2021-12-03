@@ -24,7 +24,7 @@ adjust_position <- function(data = NULL, angle = NULL){
 #' @export add_loc
 #'
 #' @examples #
-add_loc <- function(data = NULL, pattern = "_"){
+add_loc <- function(data = NULL, pattern = "x"){
   data = as.data.frame(data)
   rownames(data) = gsub(".*_","",rownames(data))
   data_loc <- cbind.data.frame(x=as.numeric(sapply(strsplit(rownames(data),split=pattern),"[",1)),
@@ -47,7 +47,7 @@ add_loc <- function(data = NULL, pattern = "_"){
 #' @importFrom Seurat CreateSeuratObject
 #'
 #' @examples #
-read_spat <- function(file,pattern = "_",seurat = TRUE,name = "Spatial"){
+read_spat <- function(file,pattern = "x",seurat = TRUE,name = "Spatial"){
   data_BGI_raw = data.table::fread(file)
   splitline()
   messageline("Data imported but waiting for convert")
@@ -133,7 +133,7 @@ load_spat_env <- function(pkgs = c("Seurat","tidyverse","data.table","patchwork"
 splitline <- function() {
   width <- getOption("width")
   ws <- rep("=", floor(width))
-  cat("\n",ws,"\n" sep = "")
+  cat("\n",ws, sep = "")
 }
 
 #' Title nothing
@@ -146,7 +146,7 @@ splitline <- function() {
 #' @examples #
 messageline <- function(message) {
   width <- getOption("width")
-  mid <- paste0("\n^_^   ",message,"   ^_^\n",sep = "")
+  mid <- paste0("^_^   ",message,"   ^_^\n",sep = "")
   ws <- rep(" ", floor((width - nchar(mid))/2))
   cat(ws, mid, ws, sep = "")
 }
