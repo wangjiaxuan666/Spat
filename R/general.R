@@ -145,10 +145,14 @@ splitline <- function() {
 #'
 #' @examples #
 messageline <- function(message) {
-  width <- getOption("width")
+  #width <- getOption("width")
   mid <- paste0("^_^   ",message,"   ^_^\n",sep = "")
-  ws <- rep(" ", floor((width - nchar(mid))/2))
-  cat(ws, mid, ws, sep = "")
+  #ws <- rep(" ", floor((width - nchar(mid))/2))
+  cat(
+    #ws, 
+    mid,
+    #ws, 
+    sep = "")
 }
 
 #' Title the github website:https://github.com/satijalab/seurat/issues/2833
