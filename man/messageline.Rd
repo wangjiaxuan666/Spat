@@ -16,5 +16,5 @@ charater
 Title nothing
 }
 \examples{
-#
+messageline("yesimola !")
 }

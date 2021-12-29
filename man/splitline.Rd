@@ -13,5 +13,5 @@ charater
 Title cool but useless
 }
 \examples{
-#
+splitline()
 }

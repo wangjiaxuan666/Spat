@@ -123,13 +123,12 @@ load_spat_env <- function(pkgs = c("Seurat","tidyverse","data.table","patchwork"
   close(pb)
 }
 
-
 #' Title cool but useless
 #'
 #' @return charater
 #' @export splitline
 #'
-#' @examples #
+#' @examples splitline()
 splitline <- function() {
   width <- getOption("width")
   ws <- rep("=", floor(width))
@@ -143,15 +142,15 @@ splitline <- function() {
 #' @return charater
 #' @export messageline
 #'
-#' @examples #
+#' @examples messageline("yesimola !")
 messageline <- function(message) {
-  #width <- getOption("width")
-  mid <- paste0("^_^   ",message,"   ^_^\n",sep = "")
-  #ws <- rep(" ", floor((width - nchar(mid))/2))
+  width <- getOption("width")
+  mid <- paste("^_^   ",message,"   ^_^\n",sep = "")
+  ws <- rep(" ", floor((width - nchar(mid))/2))
   cat(
-    #ws, 
+    ws,
     mid,
-    #ws, 
+    ws,
     sep = "")
 }
 
@@ -231,4 +230,58 @@ loci2name <- function(object){
   coord  = paste0(rowid,"x",colid)
   object <- Seurat::RenameCells(object, new.names = coord)
   return(object)
+}
+
+
+#' Add the image to the seurat object for some software use coord and image information
+#'
+#' @param seuratObject a seurat object with no image s4 obejct
+#'
+#' @return seuratObject
+#' @export add_image
+#' @importFrom tibble column_to_rownames
+#' @importFrom tidyr pivot_wider
+#' @importFrom methods new
+#'
+#' @examples #
+add_image <- function(seuratObject){
+  stopifnot("The obect must be a Seurat"=class(object) ==  "Seurat")
+  spotfactor = list(spot =1,fiducial=1, hires=1,lowres=1)
+  class(spotfactor) = "scalefactors"
+  position =as.data.frame(seuratObject@reductions[["spatial"]]@cell.embeddings)
+  #----------------
+  ncounts = as.data.frame(seuratObject@meta.data[["total_counts"]])
+  ncounts = cbind(position,ncounts)
+  colnames(ncounts) = c("y","x","ncount")
+  ncounts$ncount = round((ncounts$ncount - min(ncounts$ncount))/(max(ncounts$ncount)-min(ncounts$ncount)),digits = 4)
+  img = tidyr::pivot_wider(data = ncounts,x,names_from = y,values_from = ncount)
+  img = tibble::column_to_rownames(img,"x")
+  img = as.matrix(img)
+  img[is.na(img)] = 0
+  img = img[order(as.numeric(rownames(img))),]
+  img = img[,order(as.numeric(colnames(img)))]
+  img = 1 - img
+  img <- array(rep(img,3),dim = c(nrow(img),ncol(img),3))
+  #grid::grid.raster(img_array, interpolate=FALSE)
+  #---------------------
+  position = position[,c(1,2,1,2)]
+  colnames(position) = c("col","row","imagecol","imagerow")
+  spotradius =round(1.71/(length(unique(position$row))+length(unique(position$col))),digits = 3)
+  img <- new(
+    Class = 'VisiumV1',
+    image = img,
+    coordinates = position,
+    scale.factors = spotfactor,
+    spot.radius = spotradius
+  )
+  img2 = list(slice1 = img)
+  seuratObject@images = img2
+  #-------
+  seuratObject@images[["slice1"]]@key = "slice1_"
+  seuratObject@images[["slice1"]]@assay = "RNA"
+  seuratObject@images[["slice1"]]@coordinates[["tissue"]] = rep(1,nrow(position))
+  #seuratObject@assays[["RNA"]]@counts = as.sparse(seuratObject@assays[["RNA"]]@counts)
+  #seuratObject@assays[["RNA"]]@data = as.sparse(seuratObject@assays[["RNA"]]@data)
+  seuratObject@active.ident = seuratObject$louvain_clusters
+  return(seuratObject)
 }
