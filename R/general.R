@@ -245,7 +245,7 @@ loci2name <- function(object){
 #'
 #' @examples #
 add_image <- function(seuratObject){
-  stopifnot("The obect must be a Seurat"=class(object) ==  "Seurat")
+  #stopifnot("The obect must be a Seurat"=class(object) ==  "Seurat")
   spotfactor = list(spot =1,fiducial=1, hires=1,lowres=1)
   class(spotfactor) = "scalefactors"
   position =as.data.frame(seuratObject@reductions[["spatial"]]@cell.embeddings)
