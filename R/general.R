@@ -254,6 +254,7 @@ add_image <- function(seuratObject){
   ncounts = cbind(position,ncounts)
   colnames(ncounts) = c("y","x","ncount")
   ncounts$ncount = round((ncounts$ncount - min(ncounts$ncount))/(max(ncounts$ncount)-min(ncounts$ncount)),digits = 4)
+  ncounts = round(ncounts)
   img = tidyr::pivot_wider(data = ncounts,x,names_from = y,values_from = ncount)
   img = tibble::column_to_rownames(img,"x")
   img = as.matrix(img)
