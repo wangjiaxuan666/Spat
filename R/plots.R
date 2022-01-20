@@ -114,3 +114,40 @@ plot_chip <- function(data = data,features = features,size = 2, cols = c("white"
   }
   return(plot_result)
 }
+
+
+#' Title plot Scatterpie for the spotlight result
+#'
+#' @param st_object the seurat object with the meta.data including you want to display.
+#' @param cell_types the names of meta.data colnames which you want to display.
+#' @param slice slice name, the object name in image slot in seurat object,not the image name.
+#' @param alpha the point alpha.
+#' @param pie_scale the pie size.
+#'
+#' @importFrom ggplot2 ggplot aes scale_y_reverse ylim xlim theme_void
+#' @importFrom scatterpie geom_scatterpie
+#'
+#' @return ggplot2 object
+#' @export SpatialScatterpie
+#'
+#' @examples # no example
+SpatialScatterpie <- function(st_object, cell_types, slice = "slice1", alpha = 1, pie_scale = 1){
+  if (!is(st_object, "Seurat"))
+    stop("ERROR: se_obj must be a Seurat object!")
+  if (!is(cell_types, "vector"))
+    stop("ERROR: cell_types_all must be a vector/list object!")
+  if (!is.numeric(alpha))
+    stop("ERROR: scatterpie_alpha must be numeric between 0 and 1!")
+  if (!is.numeric(pie_scale))
+    stop("ERROR: pie_scale must be numeric between 0 and 1!")
+  if (is.null(slice) | (!is.null(slice) && !slice %in% names(st_object@images))) {
+    slice <- names(st_object@images)[1]
+    warning(sprintf("Using slice %s", slice))
+  }
+  auto_size = min(1483 / ncol(st_object), 1)
+  coord_data = cbind(st_object@images[[slice]]@coordinates,st_object@meta.data[,cell_types])
+  ggplot2::ggplot() +
+    scatterpie::geom_scatterpie(data = coord_data, ggplot2::aes(x = col, y = row),cols = cell_types, color = NA, alpha = alpha, pie_scale = auto_size) +
+    ggplot2::scale_y_reverse() +
+    ggplot2::theme_void()
+}

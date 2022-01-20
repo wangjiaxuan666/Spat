@@ -191,3 +191,17 @@ d = MIA_analysis(sc_object = stereo_smn, sp_object = stereo, sc_diff = sc_diff, 
 而`sp_diff`和`sp_object`，就是空间组的seurat的对象和差异分析矩阵。
 
 赶紧来尝试下吧！
+
+## add_image
+
+这个功能主要是针对非10x空间组的数据，通过ncounts的热图生成一个伪HE图，这样才可以兼并到Seurat的空间组分析流程中。
+
+用法比较简单：
+```{r eval=FALSE}
+st_object = add_image(st_object)
+```
+就可以生成对应的image slot
+
+## SpatialScatterpie
+
+绘制点饼图，主要是是为了展示splotlight的结果，但是同时也适用于展示两种以上的meta.data信息的展示。

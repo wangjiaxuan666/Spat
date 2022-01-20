@@ -22,4 +22,6 @@ Imports:
     utils,
     monocle3,
     Matrix,
-    tibble
+    tibble,
+    scatterpie,
+    methods

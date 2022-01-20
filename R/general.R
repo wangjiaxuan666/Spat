@@ -241,7 +241,7 @@ loci2name <- function(object){
 #' @export add_image
 #' @importFrom tibble column_to_rownames
 #' @importFrom tidyr pivot_wider
-#' @importFrom methods new
+#' @importFrom methods new is
 #'
 #' @examples #
 add_image <- function(seuratObject){
