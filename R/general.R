@@ -24,8 +24,8 @@ adjust_position <- function(data = NULL, angle = NULL){
 #' @export add_loc
 #'
 #' @examples #
-add_loc <- function(data = NULL, pattern = "x"){
-  data = as.data.frame(data)
+add_loc <- function(data = NULL, pattern = "_"){
+  #data = as.data.frame(data)
   rownames(data) = gsub(".*_","",rownames(data))
   data_loc <- cbind.data.frame(x=as.numeric(sapply(strsplit(rownames(data),split=pattern),"[",1)),
                                y=as.numeric(sapply(strsplit(rownames(data),split=pattern),"[",2)),
@@ -47,7 +47,7 @@ add_loc <- function(data = NULL, pattern = "x"){
 #' @importFrom Seurat CreateSeuratObject
 #'
 #' @examples #
-read_spat <- function(file,pattern = "x",seurat = TRUE,name = "Spatial"){
+read_spat <- function(file,pattern = "_",seurat = TRUE,name = "Spatial"){
   data_BGI_raw = data.table::fread(file)
   splitline()
   messageline("Data imported but waiting for convert")
