@@ -20,7 +20,6 @@ Imports:
     tidyr,
     data.table,
     utils,
-    monocle3,
     Matrix,
     tibble,
     scatterpie,

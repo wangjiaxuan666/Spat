@@ -154,42 +154,42 @@ messageline <- function(message) {
     sep = "")
 }
 
-#' Title the github website:https://github.com/satijalab/seurat/issues/2833
-#'
-#' @param object the Seurat object and want to analysis in monocle3
-#'
-#' @importFrom monocle3 new_cell_data_set
-#' @importFrom utils data
-#' @return object
-#' @export seurat_to_monocle3
-#'
-#' @examples #
-seurat_to_monocle3 <- function(object){
-  stopifnot("The obect must be a Seurat"=class(object) ==  "Seurat")
-  gene_annotation <- as.data.frame(rownames(object@reductions[["pca"]]@feature.loadings),
-                                   row.names = rownames(object@reductions[["pca"]]@feature.loadings))
-  colnames(gene_annotation) <- "gene_short_name"
-  cell_metadata <- as.data.frame(object@assays[["RNA"]]@counts@Dimnames[[2]],
-                                 row.names = object@assays[["RNA"]]@counts@Dimnames[[2]])
-  colnames(cell_metadata) <- "barcode"
-  New_matrix <- object@assays[["RNA"]]@counts
-  New_matrix <- New_matrix[rownames(object@reductions[["pca"]]@feature.loadings), ]
-  expression_matrix <- New_matrix
-  cds_from_seurat <- monocle3::new_cell_data_set(expression_matrix,
-                                       cell_metadata = cell_metadata,
-                                       gene_metadata = gene_annotation)
-  recreate.partition <- c(rep(1, length(cds_from_seurat@colData@rownames)))
-  names(recreate.partition) <- cds_from_seurat@colData@rownames
-  recreate.partition <- as.factor(recreate.partition)
-  cds_from_seurat@clusters@listData[["UMAP"]][["partitions"]] <- recreate.partition
-  list_cluster <- object@active.ident
-  names(list_cluster) <- object@assays[["RNA"]]@data@Dimnames[[2]]
-  cds_from_seurat@clusters@listData[["UMAP"]][["clusters"]] <- list_cluster
-  cds_from_seurat@clusters@listData[["UMAP"]][["louvain_res"]] <- "NA"
-  cds_from_seurat@int_colData@listData$reducedDims@listData[["UMAP"]] <-object@reductions[["umap"]]@cell.embeddings
-  cds_from_seurat@preprocess_aux$gene_loadings <- object@reductions[["pca"]]@feature.loadings
-  return(cds_from_seurat)
-}
+# #' Title the github website:https://github.com/satijalab/seurat/issues/2833
+# #'
+# #' @param object the Seurat object and want to analysis in monocle3
+# #'
+# #' @importFrom monocle3 new_cell_data_set
+# #' @importFrom utils data
+# #' @return object
+# #' @export seurat_to_monocle3
+# #'
+# #' @examples #
+# seurat_to_monocle3 <- function(object){
+#   stopifnot("The obect must be a Seurat"=class(object) ==  "Seurat")
+#   gene_annotation <- as.data.frame(rownames(object@reductions[["pca"]]@feature.loadings),
+#                                    row.names = rownames(object@reductions[["pca"]]@feature.loadings))
+#   colnames(gene_annotation) <- "gene_short_name"
+#   cell_metadata <- as.data.frame(object@assays[["RNA"]]@counts@Dimnames[[2]],
+#                                  row.names = object@assays[["RNA"]]@counts@Dimnames[[2]])
+#   colnames(cell_metadata) <- "barcode"
+#   New_matrix <- object@assays[["RNA"]]@counts
+#   New_matrix <- New_matrix[rownames(object@reductions[["pca"]]@feature.loadings), ]
+#   expression_matrix <- New_matrix
+#   cds_from_seurat <- monocle3::new_cell_data_set(expression_matrix,
+#                                        cell_metadata = cell_metadata,
+#                                        gene_metadata = gene_annotation)
+#   recreate.partition <- c(rep(1, length(cds_from_seurat@colData@rownames)))
+#   names(recreate.partition) <- cds_from_seurat@colData@rownames
+#   recreate.partition <- as.factor(recreate.partition)
+#   cds_from_seurat@clusters@listData[["UMAP"]][["partitions"]] <- recreate.partition
+#   list_cluster <- object@active.ident
+#   names(list_cluster) <- object@assays[["RNA"]]@data@Dimnames[[2]]
+#   cds_from_seurat@clusters@listData[["UMAP"]][["clusters"]] <- list_cluster
+#   cds_from_seurat@clusters@listData[["UMAP"]][["louvain_res"]] <- "NA"
+#   cds_from_seurat@int_colData@listData$reducedDims@listData[["UMAP"]] <-object@reductions[["umap"]]@cell.embeddings
+#   cds_from_seurat@preprocess_aux$gene_loadings <- object@reductions[["pca"]]@feature.loadings
+#   return(cds_from_seurat)
+# }
 
 #' Title the ggplot2 ggsave function changed for the dir path
 #'
@@ -225,8 +225,8 @@ loci2name <- function(object){
   splitline()
   messageline("Add The chip coord to the cell name")
   splitline()
-  rowid = object@images[["slice1"]]@coordinates[["row"]]*100
-  colid = object@images[["slice1"]]@coordinates[["col"]]*100
+  rowid = object@images[["slice1"]]@coordinates[["row"]]
+  colid = object@images[["slice1"]]@coordinates[["col"]]
   coord  = paste0(rowid,"x",colid)
   object <- Seurat::RenameCells(object, new.names = coord)
   return(object)

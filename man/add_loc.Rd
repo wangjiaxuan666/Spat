@@ -4,7 +4,7 @@
 \alias{add_loc}
 \title{Title Split rownames into the coordinate position of X and Y.}
 \usage{
-add_loc(data = NULL, pattern = "x")
+add_loc(data = NULL, pattern = "_")
 }
 \arguments{
 \item{data}{the data need its rownames including the postion x and y}
