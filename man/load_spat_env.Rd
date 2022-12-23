@@ -5,7 +5,7 @@
 \title{Title the packages environment need install or library}
 \usage{
 load_spat_env(
-  pkgs = c("Seurat", "tidyverse", "data.table", "patchwork", "Matrix")
+  pkgs = c("Seurat", "Matrix", "tidyverse", "patchwork", "data.table")
 )
 }
 \arguments{
